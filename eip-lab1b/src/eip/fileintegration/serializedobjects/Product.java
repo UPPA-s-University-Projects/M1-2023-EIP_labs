@@ -18,7 +18,7 @@ import java.io.Serializable;
 */ 
 public class Product implements Serializable {
     
-    //
+    //Nos attributs de classe
     private int productId;
     private String productDescription;
     private float productPrice;

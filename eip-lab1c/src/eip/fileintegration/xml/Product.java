@@ -1,11 +1,9 @@
-package eip.fileintegration.xml;
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
+package eip.fileintegration.xml;
 
 import java.io.Serializable;
 
@@ -13,8 +11,14 @@ import java.io.Serializable;
  *
  * @author ernestoexposito
  */
+/*
+* Notre classe entité
+* Elle nous permet de manipuler les données sous forme d'objet
+* Elle doit implémenter l'interface Serializable car nous voulons compiler et décompiler les données dans des fichiers 
+*/ 
 public class Product implements Serializable {
     
+    //Nos attributs de classe
     private int productId;
     private String productDescription;
     private float productPrice;

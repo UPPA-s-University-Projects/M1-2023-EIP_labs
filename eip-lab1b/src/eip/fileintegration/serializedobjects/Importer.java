@@ -10,12 +10,11 @@ import java.io.ObjectInputStream;
  * * @author ernestoexposito
  * 
  */
+
 /*
- * *
- * * Explications :
- * * Ce fichier permet d'ouvrir un fichier ".txt" et de le lire
- * *
- * 
+ * Explications :
+ * Ce fichier permet d'ouvrir un fichier ".txt" et de le lire
+ *
  */
 public class Importer {
 

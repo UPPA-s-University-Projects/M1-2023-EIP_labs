@@ -2,9 +2,10 @@
 
 Ce lab vise à appliquer le modèle de style d'intégration de messagerie EIP basé sur l'utilisation du courtier de messages RabbitMQ.
 
-Ce cinquième lab apporte le concept de système de messagerie. Nous n'avons plus besoin d'importer les données du producteur dans le consommateur. En effet, les informations sont directement envoyées sur un serveur auquel nous avons abonné notre consommateur. Dès que le producteur envoie des données, le serveur notifie le consommateur qui vient récupérer les informations du serveur.
+Ce cinquième lab apporte le concept de système de messagerie. Nous n'avons plus besoin d'importer les données du producteur dans le consommateur. En effet, nous utilisons un système point-to-point. 
+Un système de messagerie point-à-point (point-to-point en anglais) est un type de système de messagerie dans lequel les messages sont envoyés directement d'un expéditeur à un destinataire unique.
 
-Nous utilisons RabbitMQ pour ce lab afin de visualiser les requêtes et les réponses. Pour plus d'informations sur l'installation et l'utilité, lisez la partie "Installation" de ce README.
+
 
 ### RabbitMQ & Docker
 
@@ -16,8 +17,9 @@ Pour simplifier la tâche, nous allons utiliser Docker pour lancer le serveur Ra
 4. Vous pouvez ouvrir Docker Desktop
 5. Ouvrez un terminal et tapez la commande suivante : `docker run -it --rm --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:3.11-management`
 6. Si vous avez bien suivi les instructions, vous devriez voir un nouveau conteneur dans Docker Desktop.
-
 ![Le nouveau conteneur dans Docker Desktop](../res/docker.PNG)
+7. Vous pouvez lancer le serveur RabbitMQ en ouvrant votre navigateur et en allant sur http://localhost:15672. 
+8. Le nom d'utilisateur : `guest` et le mot de passe : `guest`
 
 ---
 

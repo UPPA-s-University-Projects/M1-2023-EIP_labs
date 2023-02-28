@@ -22,11 +22,11 @@ public class Exporter {
     // Java Database Connectivity (JDBC) driver for JavaDB (Derby)   
     static final String JDBC_DRIVER = "org.postgresql.Driver";
     // The URL to the database (can be retrieved from netbeans/services/Databases
-    static final String DB_URL = "jdbc:postgresql://localhost:5432/DATABASE_TEST";   
+    static final String DB_URL = "jdbc:postgresql://localhost:5432/PRODUCT";   
     // the database user
-    static final String USER = "VOTRE_NOM_D'UTILISATEUR"; //de base : postgres
+    static final String USER = "postgres"; //de base : postgres
     // the databased password
-    static final String PASS = "VOTRE_MOT_DE_PASS";
+    static final String PASS = "40c275410B";
     // the connection to the database to be used to export data 
     private Connection conn = null;
     

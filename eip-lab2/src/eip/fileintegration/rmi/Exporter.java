@@ -30,7 +30,7 @@ public class Exporter {
         // when the exporter is created, it will request the server name
         // accessing the registry available at localhost port 1099
         // where a service has been registred under the name RemoteIntegration
-    	ri = (IntegrateProductInterface) Naming.lookup("rmi://localhost:1099/RemoteIntegration");
+    	ri = (IntegrateProductInterface) Naming.lookup("rmi://localhost:8765/RemoteIntegration");
     }
 
     public void exportObject(Product p)  {

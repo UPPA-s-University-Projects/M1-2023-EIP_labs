@@ -27,10 +27,10 @@ public class Importer extends UnicastRemoteObject implements IntegrateProductInt
         // the consumer reference is stored
         this.c=c;
         // a new registry is created at port 1099
-        LocateRegistry.createRegistry(1099);
+        LocateRegistry.createRegistry(8765);
         // the current service provided by the importer is registered
         // under the name RemoteIntegration
-        Naming.rebind("rmi://localost:1099/RemoteIntegration", this);
+        Naming.rebind("rmi://localhost:8765/RemoteIntegration", this);
     }
     
     public void addProduct(Product p)  {

@@ -14,29 +14,37 @@ import java.rmi.server.UnicastRemoteObject;
  *
  * @author ernestoexposito
  */
-// the Importer implements the remote interface and extends the UnicastRemoteObject
+
+// Cette classe implémente l'interface distante et étend UnicastRemoteObject
 public class Importer extends UnicastRemoteObject implements IntegrateProductInterface {
     
-    // as this pattern allows synchronous communication, 
-    // we will need to store the reference to the consumer
-    // in order to automatically add the product when the importer is
-    // invoked by the exporter
+    // Parce que ce patron permet une communication synchrone,
+    // nous devons stocker la référence au consommateur
+    // pour pouvoir ajouter automatiquement le produit quand l'importeur est
+    // invoqué par l'exportateur
     private Consumer c=null;
 
+    /*
+     * Creates a new instance of Importer
+     */
     public Importer(Consumer c) throws Exception {
-        // the consumer reference is stored
+        
+        // L'importeur stocke la référence au consommateur
         this.c=c;
-        // a new registry is created at port 1099
+
+        
+        // Un nouveau registre est créé au port 1099
         LocateRegistry.createRegistry(1099);
-        // the current service provided by the importer is registered
-        // under the name RemoteIntegration
+
+        // Le service actuel fourni par l'importeur est enregistré
+        // sous le nom RemoteIntegration
         Naming.rebind("rmi://localost:1099/RemoteIntegration", this);
     }
     
     public void addProduct(Product p)  {
-        // this is the remote method implemented by the importer
-        // the product will be automatically added into the
-        // consumer table
+        
+        // Cette méthode est appelée par l'exportateur pour ajouter un produit
+        // dans la table du consommateur
        c.addProduct(p);
     }  
 }

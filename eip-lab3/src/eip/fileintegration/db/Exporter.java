@@ -19,37 +19,49 @@ import java.util.logging.Logger;
  */
 public class Exporter {
 
-    // Java Database Connectivity (JDBC) driver for JavaDB (Derby)   
+    // La classe du driver JDBC pour PostgreSQL
     static final String JDBC_DRIVER = "org.postgresql.Driver";
-    // The URL to the database (can be retrieved from netbeans/services/Databases
+
+    // L'URL de la base de données (Si vous avez crée une connexion vers une BDD sous Eclipse, vous pouvez copier l'URL de la connexion)
     static final String DB_URL = "jdbc:postgresql://localhost:5432/DATABASE_TEST";   
-    // the database user
+
+    // L'utilisateur de la base de données
     static final String USER = "VOTRE_NOM_D'UTILISATEUR"; //de base : postgres
-    // the databased password
+
+    // Le mot de passe de la base de données
     static final String PASS = "VOTRE_MOT_DE_PASS";
-    // the connection to the database to be used to export data 
+
+    // La référence à la connexion à la base de données pour exporter les objets
     private Connection conn = null;
     
 
+    /*
+     * Creates a new instance of Exporter
+     */
     public Exporter() throws Exception {
-        // the connection is established to the database
+        // La connexion à la base de données est établie
         Class.forName(JDBC_DRIVER);
         conn = DriverManager.getConnection(DB_URL,USER,PASS);
     }
 
+    // Cette méthode est appelée par le producteur pour exporter un objet
     public void exportObject(Product p)  {
     	try {
-	        // a SQL statement to be sent via the database connection is created
+            // Une requête SQL à envoyer via la connexion à la base de données est créée
 	    	Statement stmt = conn.createStatement();
-	        // the SQL string statement is prepared including the product attributes
+
+            // La chaîne de caractères de la requête SQL est préparée avec les attributs du produit
+            // Nous utilisons des '\' pour échapper les caractères spéciaux (")
 	    	String sql = "INSERT INTO \"PRODUCT\" (\"ID\", \"DESCRIPTION\", \"PRICE\", \"AMOUNT\") VALUES ("
 	    			+p.getProductId()+","
 	    			+"'"+p.getProductDescription()+"',"
 	    			+p.getProductPrice()+","
 	    			+p.getProductAmount()+");";
-	        // the statement is executed
+
+            // La requête est envoyée à la base de données
 	    	stmt.executeUpdate(sql);
-	        // the statmeent is closed.
+
+	        // La connexion est fermée
 	    	stmt.close();
     	}catch(SQLException ex) {
     		Logger.getLogger(Exporter.class.getName()).log(Level.SEVERE, null, ex);
@@ -57,9 +69,10 @@ public class Exporter {
 
     }
     
+    // Cette méthode est appelée pour fermer la connexion à la base de données
     public void close()  
     {
-        // the connection is closed.
+        // la connexion est fermée
     	try {
     		conn.close();
     	}catch(SQLException ex) {

@@ -15,58 +15,76 @@ import java.util.logging.Logger;
  */
 public class Importer {
 
-	// Java Database Connectivity (JDBC) driver for JavaDB (Derby)   
+	// La classe du driver JDBC pour PostgreSQL
     static final String JDBC_DRIVER = "org.postgresql.Driver";
-    // The URL to the database (can be retrieved from netbeans/services/Databases
+
+    // L'URL de la base de données (Si vous avez crée une connexion vers une BDD sous Eclipse, vous pouvez copier l'URL de la connexion)
     static final String DB_URL = "jdbc:postgresql://localhost:5432/DATABASE_TEST";   
-    // the database user
-    static final String USER = "postgres";
-    // the databased password
-    static final String PASS = "40c275410B";
-    // the connection to the database to be used to export data 
+
+    // L'utilisateur de la base de données
+    static final String USER = "VOTRE_NOM_D'UTILISATEUR"; //de base : postgres
+
+    // Le mot de passe de la base de données
+    static final String PASS = "VOTRE_MOT_DE_PASS";
+
+    // La référence à la connexion à la base de données pour exporter les objets
     private Connection conn = null;
     
 
+    /*
+     * Creates a new instance of Exporter
+     */
     public Importer() throws Exception {
-        // the connection is established to the database
+        // La connexion à la base de données est établie
     	Class.forName(JDBC_DRIVER);
         conn = DriverManager.getConnection(DB_URL,USER,PASS);
 
     }
 
+    // Cette méthode est appelée par le consommateur pour importer un objet
     Object[] importObjects() throws SQLException {
-        // a SELECT SQL command intended to retrieve all the products from the database is prepared
+        // Une requête SQL pour récupérer tous les produits est créée
         String sql = "SELECT * FROM \"PRODUCT\"";
-        // a SQL statement to be sent via the database connection is created 
+
+        // Une requête SQL à envoyer via la connexion à la base de données est créée
         Statement stmt = conn.createStatement();
-        // the SELECT command is executed and the results are retrieved
+
+        // La requête est exécutée et les résultats sont récupérés
         ResultSet rs = stmt.executeQuery(sql);
-        // a list is created to add the retrieved products
+
+        // Une liste est créée pour ajouter les produits récupérés
         ArrayList l = new ArrayList();
+        // un produit est créé
         Product p = null;
+
+        // Tant qu'il y a des résultats
         while(rs.next()) {
-            // for each result set the columns are retrieved
+            // Pour chaque résultat, on récupère les attributs du produit
             int id =rs.getInt("ID");
             String desc = rs.getString("DESCRIPTION");
             float price = rs.getFloat("PRICE");
             int amount = rs.getInt("AMOUNT");
-            // a product is created with the retrieved data
+
+            // Un produit est créé avec les attributs récupérés
             p = new Product(id, desc, price, amount);
-            // the product is added to the list
+
+            // le produit est ajouté à la liste
             l.add(p);
         }
-        
-        // the results set is cloed
+
+        // le résultat de la requête est fermé
         rs.close();
-        // an object of products is sent back
+
+        // Un objet tableau est créé à partir de la liste et est retourné
         return l.toArray();
         
     }
 
+    // Cette méthode est appelée pour fermer la connexion à la base de données
     public void close() {
         
     	try {
-    		// the connection is closed
+            // La connexion est fermée
     		conn.close();
     	}catch(SQLException ex) {
     		Logger.getLogger(Exporter.class.getName()).log(Level.SEVERE, null, ex);

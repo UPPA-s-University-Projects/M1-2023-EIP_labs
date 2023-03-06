@@ -8,9 +8,9 @@ import java.rmi.RemoteException;
  * @author ernestoexposito
  */
 
-// the interface implementing the RMI Remote interface
+// L'interface distante doit étendre l'interface Remote
 public interface IntegrateProductInterface extends Remote {
-    // the remote methods of the remote interface
+    // La méthode distante doit lever une exception RemoteException
     public void addProduct (Product p) throws RemoteException ;
     
 }

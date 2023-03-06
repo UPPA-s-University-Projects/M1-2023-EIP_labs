@@ -12,11 +12,12 @@ import com.rabbitmq.client.QueueingConsumer;
  */
 
 public class ConsumerCLI {
-    // the name of the queue to be used to communicate
+    // Le nom de la file d'attente à utiliser pour communiquer
     private final static String QUEUE_NAME = "queue1";
 
     public static void main(String[] argv) throws Exception {
-        // Create a factory of connections to the MOM
+
+        // Créer une fabrique de connexions à la MOM
         ConnectionFactory factory = new ConnectionFactory();
         // Specify the address of the MOM server
         factory.setHost("localhost");

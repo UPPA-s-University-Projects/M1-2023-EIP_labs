@@ -156,7 +156,7 @@ public class Importer implements ErrorHandler {
 
             // the <ProductDescription> element is retrieved and its value stored into the product object
             //L'élément <ProductDescription> est récupéré et sa valeur est stockée dans l'objet produit
-            e = (Element) currentElement.getElementsByTagName("ProdcutDescription").item(0);
+            e = (Element) currentElement.getElementsByTagName("ProductDescription").item(0);
             res.setProductDescription(e.getTextContent());
 
             // the <ProductPrice> element is retrieved and its value stored into the product object
